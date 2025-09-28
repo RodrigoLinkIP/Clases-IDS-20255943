@@ -1,4 +1,4 @@
-year = 2025
+"""year = 2025
 temperature = 28.5
 
 pi = 3.14159
@@ -16,5 +16,13 @@ print(grad)
 print(temperature)
 print(pi)
 
-print(validacion)
+print(validacion)"""
+
+edad = 20
+temperatura = 27.5
+pi = 3.14159
+pi_entero = int(pi)
+nombre = "Jose"
+
+print(pi_entero)
 
