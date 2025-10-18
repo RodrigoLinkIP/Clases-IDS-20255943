@@ -11,10 +11,11 @@ while i != n:
 print(n_.index(min(n_)))"""
 
 
-dd_ = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"]
+"""dd_ = ["LUNES", "MARTES", "MIERCOLES", "JUEVES", "VIERNES"]
 d_ = []
 for i in range(0, 5):
     m = int(input())
     d_.append(m)
 for j in range(0, 5):
-    print(f"El día {dd_[j]} se vendieron {d_[j]} productos")
+    print(f"El día {dd_[j]} se vendieron {d_[j]} productos")"""
+
