@@ -6,6 +6,4 @@ combos = []
 
 for i in range(0 , n):
     combos.append(input())
-
-for j in range(0, n):
-    print(combos[j].count("A") * pa + combos[j].count("B") * pb + combos[j].count("C") * pc)
+    print(combos[i].count("A") * pa + combos[i].count("B") * pb + combos[i].count("C") * pc)

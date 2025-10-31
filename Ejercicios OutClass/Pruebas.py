@@ -44,7 +44,7 @@ for i in range(0, n):
     sp.append(int(input()))
 print(sp.index(min(sp)) + 1)"""
 
-r = ""
+"""r = ""
 minis = ("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z")
 mayus = ("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")
 r.rfind(".")
@@ -52,4 +52,23 @@ r.rfind(".")
 def validate(email):
     return email
 
-print(r.rfind("."))
+print(r.rfind("."))"""
+
+
+v = [[1, 2, 3, 4, 5],
+     [6, 7, 8, 9, 10],
+     [11, 12, 13, 14, 15]]
+
+nombres = []
+n = int(input())
+
+for i in range(0,n):
+  nombres.append(input())
+    
+for l in range (0,n):
+    if len(nombres[l]) >= 8:
+      print("Si aguanto otro desarrollo de personaje")
+    elif len(nombres[l]) <= 6:
+      print("No vale la pena")
+    elif len(nombres[l]) > 6 and (nombres[l]) < 8:
+      print("Dios no creo aguantar esta vez")

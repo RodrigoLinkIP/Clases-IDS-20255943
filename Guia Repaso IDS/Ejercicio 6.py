@@ -1,8 +1,6 @@
-nombres = []
 n = int(input())
 
-for i in range (0, n):
-    nombres.append(input())
+nombres = [input() for _ in range(n)]
 
 for j in range(0, n):
     if len(nombres[j]) >= 8:

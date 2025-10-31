@@ -1,6 +1,4 @@
 n = int(input())
-nums = []
-for i in range(0 , n):
-    nums.append(int(input()))
+nums = [input() for _ in range(n)]
 print(nums.count(7))
 print(nums.count(5))
