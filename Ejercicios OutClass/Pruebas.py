@@ -1,3 +1,7 @@
+import random
+
+
+
 """hexx = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F"]
 # palabra = input()
 # palabra = palabra[::-1]
@@ -59,7 +63,7 @@ v = [[1, 2, 3, 4, 5],
      [6, 7, 8, 9, 10],
      [11, 12, 13, 14, 15]]
 
-nombres = []
+"""nombres = []
 n = int(input())
 
 for i in range(0,n):
@@ -71,4 +75,4 @@ for l in range (0,n):
     elif len(nombres[l]) <= 6:
       print("No vale la pena")
     elif len(nombres[l]) > 6 and (nombres[l]) < 8:
-      print("Dios no creo aguantar esta vez")
+      print("Dios no creo aguantar esta vez")"""

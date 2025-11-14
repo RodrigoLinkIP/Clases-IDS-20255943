@@ -1,0 +1,16 @@
+birthdays = {
+    "Alice": "Apr 1",
+    "Bob": "Dec 12",
+    "Carol": "Mar 4"
+}
+
+birthdays["Carol"] = "Sep 12"
+print(birthdays["Carol"])
+birthdays["Pau"] = "Jul 31"
+print(birthdays["Pau"])
+print(birthdays)
+del birthdays["Bob"]
+print(birthdays)
+
+for person, date in birthdays.items():
+    print(f"El cumpleaños de {person} es el día {date}")
