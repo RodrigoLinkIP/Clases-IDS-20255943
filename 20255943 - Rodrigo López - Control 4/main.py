@@ -1,11 +1,14 @@
+# Se importan las funciones de cada módulo
 from libros import registrar_libro, mostrar_libros
 from estudiantes import registrar_estudiante, mostrar_estudiantes
 from prestamos import registrar_prestamo, mostrar_prestamos
 
+# Listas donde se guardarán los datos
 libros = []
 estudiantes = []
 prestamos = []
 
+# Funcion principal del menú
 def menu():
     while True:
         print("\n--- MENÚ PRINCIPAL ---")
@@ -18,7 +21,8 @@ def menu():
         print("7. Salir")
 
         opcion = input("Seleccione una opción: ")
-
+        
+        # Dependiendo de la opción se llama una funcion
         if opcion == "1":
             registrar_libro(libros)
         elif opcion == "2":

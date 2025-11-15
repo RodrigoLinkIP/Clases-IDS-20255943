@@ -76,3 +76,11 @@ for l in range (0,n):
       print("No vale la pena")
     elif len(nombres[l]) > 6 and (nombres[l]) < 8:
       print("Dios no creo aguantar esta vez")"""
+      
+b=[]
+codigo = ""
+
+for a in b:
+  for c in a:
+    if c["codigo"] == codigo:
+      print()
