@@ -18,7 +18,7 @@ usuarios = [
 ]
 platos = []
 complementos = []
-pedidos = []
+reservas = []
 
 # Menu inicial
 
@@ -35,7 +35,10 @@ while cafeteria:
                 else:
                     print("Contraseña incorrecta")
             elif usuario["rol"] == "encargado":
-                encargado = True
+                if input("Ingrese su contraseña: ") == usuario["contraseña"]:
+                    encargado = True
+                else:
+                    print("Contraseña incorrecta")
             elif usuario["rol"] == "estudiante":
                 estudiante = True
             break
@@ -56,7 +59,7 @@ while cafeteria:
                             "nombre": input("Ingrese el nombre del encargado: "),
                             "rol": en_es,
                             "becado": "no",
-                            "contraseña": input("Ingrese la contraseña del encargado")
+                            "contraseña": input("Ingrese la contraseña del encargado: ")
                         }
                         usuarios.append(nuevo_usuario)
                     elif en_es == "estudiante":
@@ -105,13 +108,14 @@ while cafeteria:
                     print("")
                 if opcion == 5:
                     admin = False
+                    break
             except ValueError:
                 print("Valor ingresado no permitido")
     
     while encargado == True:
         while True:
             try:
-                opcion = int(input("Ingrese el número de la acción que desee realizar: \n1) Agregar platos \n2) Visualizar Menú \n3) Limpiar Menú \n"))
+                opcion = int(input("Ingrese el número de la acción que desee realizar: \n1) Agregar platos \n2) Agregar complementos \n3) Visualizar platos \n4) Visualizar complementos \n5) Visualizar Reservas \n6) Limpiar Menú y Reservas \n7) Salir \n"))
                 print("")
                 # Agregar platos
                 if opcion == 1:
@@ -123,11 +127,11 @@ while cafeteria:
                     platos.append(nuevo_plato)
                     print("")
                 if opcion == 2:
-                    if len(platos) == 0:
-                        print("Aun no se han ingresado platos")
-                    else:
-                        for plato in platos:
-                            print(f"{plato["nombre"].capitalize()} \n   Precio: ${plato["precio"]} \n   Disponibles: {plato["cantidad"]}")
+                    nuevo_complemento = {
+                        "nombre": input("Ingrese el nombre del complemento: ").lower(),
+                        "cantidad": int(input("Ingrese la cantidad disponible del complemento: ")),
+                    }
+                    complementos.append(nuevo_complemento)
                     print("")
                 if opcion == 3:
                     if len(platos) == 0:
@@ -136,8 +140,36 @@ while cafeteria:
                         for plato in platos:
                             print(f"{plato["nombre"].capitalize()} \n   Precio: ${plato["precio"]} \n   Disponibles: {plato["cantidad"]}")
                     print("")
-                # Salir vista encargado
                 if opcion == 4:
+                    if len(complementos) == 0:
+                        print("Aun no se han ingresado complementos")
+                    else:
+                        for complemento in complementos:
+                            print(f"{complemento["nombre"].capitalize()} \n   Disponibles: {complemento["cantidad"]}")
+                    print("")
+                if opcion == 5:
+                    if len(reservas) == 0:
+                        print("Aun no hay reservas realizadas")
+                    else:
+                        print("Estas son las reservas realizadas:")
+                        print("-" * 114)
+                        print(f"|{" Carnet ".center(20, "-")} | {" Plato ".center(20, "-")} | {" Complementos ".center(20, "-")} | {" Tortilla ".center(20, "-")} | {" A pagar ".center(20, "-")}|")
+                        print("-" * 114)
+                        for reserva in reservas:
+                            print(f"|{reserva["codigo_estudiante"].center(20, " ")} | {reserva["plato"].capitalize().center(20, " ")} | {(reserva["complemento1"].capitalize() + ', ' + reserva["complemento2"].capitalize()).center(20, " ")} | {reserva["tortilla"].capitalize().center(20, " ")} | {str(reserva["precio"]).center(20, " ")}|")
+                    print()
+                if opcion == 6:
+                    print("¿Está seguro que desea limpiar el menú? Esto eliminará todos los platos y complementos")
+                    if input("Ingrese Si para confirmar: ").lower() == "si":
+                        platos.clear()
+                        complementos.clear()
+                        reservas.clear()
+                        print("Menú y reservas limpiados exitosamente")
+                    else:
+                        print("Limpieza cancelada")
+                    print("")
+                # Salir vista encargado
+                if opcion == 7:
                     encargado = False
                     break
             except ValueError:
@@ -147,17 +179,43 @@ while cafeteria:
         while True:
             try:
                 codigo = input("Ingrese su codigo de carnet: ")
-                opcion = int(input("Ingrese el número de la acción que desee realizar: \n1) Visualizar Menú \n"))
+                opcion = int(input("Ingrese el número de la acción que desee realizar: \n1) Visualizar Menú \n2) Salir \n"))
+                print("")
                 if opcion == 1:
                     if len(platos) == 0:
                         print("Todavía no hay platos disponibles")
                     else:
-                        print("Este es el menú del día")
-                        for plato in platos:
-                            if plato["cantidad"] > 0:
-                                print(f"- {plato["nombre"]}: ${[plato["precio"]]}")
-                        print("Estos son los complementos disponibles")
-                if opcion == 4:
+                        print("Estos son los platos disponibles: ")
+                        for i, plato in enumerate(platos, start=1):
+                            print(f"{i}- {plato["nombre"].capitalize()}: ${plato["precio"]}")
+                        print("Estos son los complementos disponibles: ")
+                        for i, complemento in enumerate(complementos, start=1):
+                            print(f"{i}- {complemento["nombre"].capitalize()}: Disponibles: {complemento["cantidad"]}")
+                        print("")
+                        if input("Si desea reservar un plato, ingrese Si: ").lower() == "si":
+                            plato_elegido = False if (x := int(input("Ingrese el número del plato que desea reservar: "))) > len(platos) or x <= 0 else x - 1
+                            complemento1_elegido = False if (y := int(input("Ingrese el número del primer complemento que desea reservar: "))) > len(complementos) or y <= 0 else y - 1
+                            complemento2_elegido = False if (z := int(input("Ingrese el número del segundo complemento que desea reservar: "))) > len(complementos) or z <= 0 else z - 1
+                            if plato_elegido is not False:
+                                if platos[plato_elegido]["cantidad"] > 0 and complementos[complemento1_elegido]["cantidad"] > 0 and complementos[complemento2_elegido]["cantidad"] > 0:
+                                    nueva_reserva = {
+                                        "codigo_estudiante": codigo,
+                                        "plato": platos[plato_elegido]["nombre"],
+                                        "complemento1": "ninguno" if complemento1_elegido is False else complementos[complemento1_elegido]["nombre"],
+                                        "complemento2": "ninguno" if complemento2_elegido is False else complementos[complemento2_elegido]["nombre"],
+                                        "tortilla": "si" if input("¿Desea agregar tortilla (Si/No)? ").lower() == "si" else "no",
+                                        "precio": platos[plato_elegido]["precio"] - 2.75 if usuario["becado"].lower() == "si" else platos[plato_elegido]["precio"]
+                                    }
+                                    reservas.append(nueva_reserva)
+                                    platos[plato_elegido]["cantidad"] -= 1
+                                    complementos[complemento1_elegido]["cantidad"] -= 1
+                                    complementos[complemento2_elegido]["cantidad"] -= 1
+                                    print("Reserva realizada con éxito")
+                                else:
+                                    print("El plato o los complementos seleccionados no están disponibles")
+                            else:
+                                print("El plato seleccionado no es válido")
+                if opcion == 2:
                     estudiante = False
                     break
             except ValueError:
